@@ -148,6 +148,17 @@ def init_db():
     ''')
 
     conn.commit()
+
+    # If users table is empty (e.g. fresh Vercel / serverless cold start), auto-seed demo data
+    try:
+        cursor.execute("SELECT COUNT(*) FROM users")
+        row = cursor.fetchone()
+        if row and row[0] == 0:
+            from seed_data import seed_database
+            seed_database(skip_init=True)
+    except Exception as se:
+        print(f"[Database Seed Warning]: {se}")
+
     conn.close()
 
 # User Helpers

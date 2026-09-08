@@ -13,8 +13,11 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Initialize database on startup
-with app.app_context():
-    init_db()
+try:
+    with app.app_context():
+        init_db()
+except Exception as e:
+    print(f"[Database Startup Warning]: {e}")
 
 # Helper for login protection
 def login_required(role=None):

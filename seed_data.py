@@ -3,8 +3,9 @@ from werkzeug.security import generate_password_hash
 from models import init_db, get_db_connection
 from config import Config
 
-def seed_database():
-    init_db()
+def seed_database(skip_init=False):
+    if not skip_init:
+        init_db()
     conn = get_db_connection()
     cursor = conn.cursor()
 
