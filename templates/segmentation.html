@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Segmentation — MarketMind AI{% endblock %}
+{% block header_title %}Customer Segmentation & AI Playbooks{% endblock %}
+
+{% block content %}
+<div class="card mb-4" style="background: linear-gradient(135deg, rgba(58, 134, 255, 0.12), rgba(0, 245, 212, 0.08)); border-left: 4px solid var(--accent-cyan);">
+  <div class="card-body p-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <h3 class="text-white mb-1"><i class="fas fa-users-viewfinder text-cyan me-2"></i>AI Segment-Driven Growth</h3>
+        <p class="text-secondary mb-0">Different customer groups require tailored messaging. Our AI continuously analyzes buying patterns and creates targeted retention funnels.</p>
+      </div>
+      <button class="btn btn-cyan" onclick="window.pixieBot && window.pixieBot.openModal()">
+        <i class="fas fa-sparkles text-dark me-1"></i> Brainstorm With Pixie
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Segments Grid -->
+<div class="row g-4 mb-4">
+  {% for seg in segments %}
+  <div class="col-lg-6">
+    <div class="card h-100">
+      <div class="card-header">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon-box" style="width: 46px; height: 46px; background: {% if seg.segment_name == 'New Customers' %}rgba(0,245,212,0.15); color:var(--accent-cyan);{% elif seg.segment_name == 'Loyal Customers' %}rgba(16,185,129,0.15); color:var(--accent-emerald);{% elif seg.segment_name == 'High Value' %}rgba(131,56,236,0.15); color:var(--accent-purple);{% else %}rgba(244,63,94,0.15); color:var(--accent-rose);{% endif %}">
+            <i class="fas fa-{% if seg.segment_name == 'New Customers' %}user-plus{% elif seg.segment_name == 'Loyal Customers' %}heart{% elif seg.segment_name == 'High Value' %}gem{% else %}clock-rotate-left{% endif %}"></i>
+          </div>
+          <div>
+            <h4 class="card-title mb-0">{{ seg.segment_name }}</h4>
+            <span class="text-secondary small">{{ seg.characteristics }}</span>
+          </div>
+        </div>
+        <span class="badge bg-secondary px-3 py-2 text-white">{{ "{:,}".format(seg.customer_count) }} Users</span>
+      </div>
+
+      <div class="card-body">
+        <div class="d-flex justify-content-between p-3 rounded mb-3" style="background: rgba(10, 15, 29, 0.6); border: 1px solid var(--border-color);">
+          <div>
+            <span class="text-secondary small d-block">Segment Size</span>
+            <strong class="text-white fs-5">{{ "{:,}".format(seg.customer_count) }}</strong>
+          </div>
+          <div class="text-end">
+            <span class="text-secondary small d-block">Avg Spend</span>
+            <strong class="text-amber fs-5">₹{{ "{:,.0f}".format(seg.avg_spend) }}</strong>
+          </div>
+        </div>
+
+        <h6 class="text-cyan text-uppercase small mb-2"><i class="fas fa-robot me-1"></i> Recommended Marketing Strategy</h6>
+        <div class="p-3 rounded mb-3" style="background: rgba(15, 23, 42, 0.7); border-left: 3px solid var(--accent-cyan); color: #e2e8f0; font-size: 0.95rem; line-height: 1.6;">
+          {{ seg.ai_strategy }}
+        </div>
+
+        <div class="d-flex gap-2">
+          <a href="{{ url_for('content_generator_view') }}" class="btn btn-sm btn-outline flex-fill">
+            <i class="fas fa-pen-nib me-1"></i> Draft Segment Message
+          </a>
+          <a href="{{ url_for('campaigns_view') }}" class="btn btn-sm btn-primary flex-fill">
+            <i class="fas fa-bullhorn me-1"></i> Target In Campaign
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

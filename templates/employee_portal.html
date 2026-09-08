@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}Part-Time Marketer Portal — MarketMind AI{% endblock %}
+{% block header_title %}Student Marketer & Affiliate Workspace{% endblock %}
+
+{% block content %}
+<!-- Business Person Contact Card -->
+<div class="card mb-4" style="background: linear-gradient(135deg, rgba(58, 134, 255, 0.15), rgba(0, 245, 212, 0.1)); border: 1px solid var(--border-color);">
+  <div class="card-body p-4">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-7">
+        <span class="badge bg-primary px-3 py-1 mb-2">Registered Business Partnership</span>
+        <h2 class="text-white mb-1">{{ business.business_name if business else 'Aura Trends Fashion Co.' }}</h2>
+        <p class="text-secondary small mb-2">
+          Industry: <strong class="text-cyan">{{ business.industry if business else 'Youth Apparel & Streetwear' }}</strong> • 
+          Location: <strong class="text-light">{{ business.location if business else 'Bangalore & Delhi' }}</strong>
+        </p>
+        <p class="text-light small mb-0">
+          <strong>About:</strong> {{ business.products_services if business else 'High-quality oversized graphic tees, French Terry hoodies, and college festival merchandise.' }}
+        </p>
+      </div>
+
+      <!-- Contact Actions -->
+      <div class="col-lg-5">
+        <div class="p-3 rounded" style="background: rgba(10, 15, 29, 0.7); border: 1px solid var(--border-color);">
+          <h6 class="text-amber text-uppercase small mb-2"><i class="fas fa-headset me-1"></i> Business Owner Direct Contact</h6>
+          <div class="d-flex flex-column gap-2 small">
+            <div class="text-light">
+              <i class="fas fa-user-tie text-secondary me-2"></i> Founder: <strong>Sarah Jenkins</strong>
+            </div>
+            <div class="text-light">
+              <i class="fas fa-phone text-cyan me-2"></i> Phone: 
+              <a href="tel:{{ business.contact_phone if business else '+919876543210' }}" class="text-cyan fw-bold">
+                {{ business.contact_phone if business else '+91 98765 43210' }}
+              </a>
+            </div>
+            <div class="text-light">
+              <i class="fas fa-envelope text-primary me-2"></i> Email: 
+              <a href="mailto:{{ business.contact_email if business else 'founder@auratrends.com' }}" class="text-light">
+                {{ business.contact_email if business else 'founder@auratrends.com' }}
+              </a>
+            </div>
+          </div>
+          <div class="mt-3">
+            <a href="https://wa.me/{{ (business.contact_whatsapp if business else '919876543210')|replace('+', '')|replace(' ', '') }}" target="_blank" class="btn btn-sm btn-cyan w-100">
+              <i class="fab fa-whatsapp me-1"></i> Quick WhatsApp Chat with Owner
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Employee AI Profile & Interest Affinity -->
+<div class="card mb-4" style="border-left: 4px solid var(--accent-pink);">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <h4 class="text-white mb-1"><i class="fas fa-sparkles text-pink me-2"></i>Your AI Profile & Interest Pattern</h4>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+          <span class="text-secondary small me-1">Detected Interests:</span>
+          {% for interest in (user.interests or 'Instagram Reels, Meme Marketing, Campus Outreach').split(',') %}
+            <span class="badge bg-secondary text-white">{{ interest.strip() }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-outline" onclick="window.pixieBot && window.pixieBot.openModal()">
+          <i class="fas fa-magic text-pink me-1"></i> Get Ad Ideas from Pixie
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI-Sorted Marketing Jobs Matching Interests -->
+<div class="card mb-4">
+  <div class="card-header">
+    <div>
+      <h3 class="card-title"><i class="fas fa-bolt text-amber"></i> AI-Matched Marketing Jobs</h3>
+      <span class="text-secondary small">Automatically sorted and prioritized by your activity patterns & skills</span>
+    </div>
+    <span class="badge bg-cyan text-dark fw-bold px-3 py-1">AI Match Active</span>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Job / Task Title</th>
+            <th>Platform</th>
+            <th>AI Match Score</th>
+            <th>Reward (₹)</th>
+            <th>Personalized Ad Hook</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in matched_tasks %}
+          <tr>
+            <td>
+              <strong class="text-white d-block">{{ task.title }}</strong>
+              <span class="text-secondary small">{{ task.description }}</span>
+            </td>
+            <td>
+              <span class="badge" style="background: rgba(58, 134, 255, 0.15); color: var(--primary-blue);">
+                {{ task.channel }}
+              </span>
+            </td>
+            <td>
+              <span class="badge bg-success text-white px-2 py-1" style="font-size: 0.85rem;">
+                <i class="fas fa-heart-pulse me-1"></i> {{ task.match_score }}% Match
+              </span>
+            </td>
+            <td class="text-amber fw-bold fs-6">₹{{ task.reward_inr }}</td>
+            <td style="max-width: 260px;">
+              <div class="p-2 rounded small" style="background: rgba(10, 15, 29, 0.7); border: 1px solid var(--border-color); color: #cbd5e1;">
+                "{{ task.ad_suggestion }}"
+                <button class="btn btn-sm btn-outline py-0 px-2 mt-1 d-block" onclick="navigator.clipboard.writeText(`{{ task.ad_suggestion }}`); alert('Copied ad hook to clipboard!')">
+                  <i class="fas fa-copy"></i> Copy Ad
+                </button>
+              </div>
+            </td>
+            <td><span class="status-pill available">Open</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary" onclick="acceptTask({{ task.id }})">
+                <i class="fas fa-hand-holding-dollar me-1"></i> Accept Job
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- My Accepted Tasks & Proof Submission Table -->
+<div class="card mb-4">
+  <div class="card-header">
+    <h3 class="card-title"><i class="fas fa-clipboard-check text-cyan"></i> My Accepted Tasks & Submissions</h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Task Name</th>
+            <th>Channel</th>
+            <th>Reward</th>
+            <th>Status</th>
+            <th>Submitted Proof</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in my_tasks %}
+          <tr>
+            <td class="text-white fw-bold">{{ t.title }}</td>
+            <td>{{ t.channel }}</td>
+            <td class="text-amber fw-bold">₹{{ t.reward_inr }}</td>
+            <td>
+              <span class="status-pill {{ 'approved' if t.status == 'Approved' else ('submitted' if t.status == 'Submitted' else 'inprogress') }}">
+                {{ t.status }}
+              </span>
+            </td>
+            <td class="text-secondary small" style="max-width: 250px;">
+              {% if t.proof_url %}
+                <a href="{{ t.proof_url }}" target="_blank" class="text-cyan d-block"><i class="fas fa-link me-1"></i> View Proof Link</a>
+                <span>{{ t.proof_text }}</span>
+              {% else %}
+                <span class="text-muted">No proof submitted yet</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if t.status != 'Approved' %}
+                <button class="btn btn-sm btn-cyan" onclick="submitProofModal({{ t.id }}, '{{ t.title }}')">
+                  <i class="fas fa-upload me-1"></i> Submit Proof
+                </button>
+              {% else %}
+                <span class="badge bg-success"><i class="fas fa-check"></i> Rewarded</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="6" class="text-center py-4 text-secondary">
+              No tasks accepted yet! Choose a matched job above to start earning rewards.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

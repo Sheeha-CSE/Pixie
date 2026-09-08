@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Recommendation Engine — MarketMind AI{% endblock %}
+{% block header_title %}AI Marketing Recommendation Engine{% endblock %}
+
+{% block content %}
+<div class="card mb-4" style="background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(58, 134, 255, 0.15)); border: 1px solid rgba(244, 63, 94, 0.3);">
+  <div class="card-body p-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="badge bg-danger px-3 py-1 text-white fw-bold">🧠 The Innovative Engine</span>
+          <span class="text-cyan small fw-semibold">Continuous Algorithmic Monitoring</span>
+        </div>
+        <h2 class="text-white mb-1">Autonomous Marketing Growth Diagnostics</h2>
+        <p class="text-light mb-0" style="max-width: 680px;">
+          Rather than just showing static analytics, MarketMind continuously analyzes performance variations, detects friction points, and prescribes precise, high-impact counter-measures.
+        </p>
+      </div>
+      <form action="{{ url_for('refresh_recommendations_action') }}" method="POST">
+        <button type="submit" class="btn btn-cyan">
+          <i class="fas fa-rotate me-1"></i> Run Fresh AI Diagnostic
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Active AI Recommendations Cards -->
+<div class="row g-4">
+  {% for alert in alerts %}
+  <div class="col-lg-6">
+    <div class="card h-100" style="border-left: 4px solid {% if loop.index == 1 %}var(--accent-rose){% elif loop.index == 2 %}var(--accent-amber){% else %}var(--accent-cyan){% endif %};">
+      <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge {% if loop.index == 1 %}bg-danger{% elif loop.index == 2 %}bg-warning text-dark{% else %}bg-info text-dark{% endif %}">
+            <i class="fas fa-exclamation-circle me-1"></i> {{ alert.severity or 'Warning' }}
+          </span>
+          <h4 class="card-title mb-0 fs-6">{{ alert.metric_issue or alert.issue }}</h4>
+        </div>
+        <span class="text-secondary small">{{ alert.action_category or 'Optimization' }}</span>
+      </div>
+
+      <div class="card-body">
+        <p class="text-secondary small mb-3">{{ alert.impact_text or 'Detected via recent social media and conversion activity logs.' }}</p>
+
+        <div class="p-3 rounded mb-3" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color);">
+          <strong class="text-cyan d-block small mb-1"><i class="fas fa-robot me-1"></i> AI Prescribed Action:</strong>
+          <span class="text-white fs-6" style="line-height: 1.5;">
+            "{{ alert.ai_recommendation_text or alert.recommendation }}"
+          </span>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between pt-2">
+          <span class="impact-badge text-emerald small fw-bold">
+            <i class="fas fa-arrow-trend-up me-1"></i> {{ alert.estimated_impact or '+24% Expected Recovery' }}
+          </span>
+          <div class="d-flex gap-2">
+            <a href="{{ url_for('content_generator_view') }}" class="btn btn-sm btn-primary">
+              <i class="fas fa-wand-magic-sparkles me-1"></i> Execute
+            </a>
+            <button class="btn btn-sm btn-outline" onclick="window.pixieBot && window.pixieBot.openModal()">
+              <i class="fas fa-sparkles text-pink me-1"></i> Pixie Guide
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

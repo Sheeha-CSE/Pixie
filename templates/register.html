@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Register — MarketMind AI{% endblock %}
+{% block header_title %}Create MarketMind Account{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+  <div class="col-lg-6 col-md-9">
+    <div class="card p-4" style="border: 1px solid var(--border-color); box-shadow: var(--shadow-elevated);">
+      
+      <div class="text-center mb-4">
+        <div class="brand-icon mx-auto mb-3" style="width: 56px; height: 56px; font-size: 1.8rem;">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <h2 class="text-white">Get Started</h2>
+        <p class="text-secondary small">Join as a Business Owner or Part-Time Campus Marketer</p>
+      </div>
+
+      <!-- Role Selection -->
+      <div class="d-flex p-1 mb-4 rounded-pill" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color);">
+        <button type="button" id="regTabOwner" class="btn btn-sm flex-fill rounded-pill active" style="background: var(--primary-blue); color: #fff;" onclick="selectRegRole('owner')">
+          <i class="fas fa-briefcase me-1"></i> Business Owner
+        </button>
+        <button type="button" id="regTabEmployee" class="btn btn-sm flex-fill rounded-pill" style="background: transparent; color: var(--text-secondary);" onclick="selectRegRole('employee')">
+          <i class="fas fa-user-graduate me-1"></i> Part-Time Employee
+        </button>
+      </div>
+
+      <form action="{{ url_for('register_view') }}" method="POST">
+        <input type="hidden" name="role" id="regRoleInput" value="owner">
+
+        <div class="row g-3">
+          <div class="col-md-6 form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-control" placeholder="e.g. Sarah Jenkins" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" placeholder="name@domain.com" required>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6 form-group">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Create strong password" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="form-label">Contact Phone / WhatsApp</label>
+            <input type="text" name="phone" class="form-control" placeholder="+91 98765 43210" required>
+          </div>
+        </div>
+
+        <!-- Dynamic Fields for Business Owner -->
+        <div id="ownerFieldsSection" class="p-3 my-3 rounded" style="background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border-color);">
+          <h5 class="text-cyan mb-3 small text-uppercase"><i class="fas fa-store me-1"></i> Business Details</h5>
+          <div class="row g-3">
+            <div class="col-md-6 form-group mb-0">
+              <label class="form-label">Business / Startup Name</label>
+              <input type="text" name="business_name" class="form-control" placeholder="e.g. Aura Trends">
+            </div>
+            <div class="col-md-6 form-group mb-0">
+              <label class="form-label">Industry</label>
+              <input type="text" name="industry" class="form-control" placeholder="e.g. College Fashion & Streetwear">
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Fields for Employee -->
+        <div id="employeeFieldsSection" class="p-3 my-3 rounded" style="background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border-color); display: none;">
+          <h5 class="text-amber mb-2 small text-uppercase"><i class="fas fa-star me-1"></i> Your Marketing Interests & Skills</h5>
+          <p class="text-secondary small mb-3">Our AI will automatically match and sort jobs based on your selections!</p>
+          
+          <div class="form-group mb-0">
+            <label class="form-label">Select All Marketing Channels You Love</label>
+            <input type="text" name="interests" id="employeeInterestsInput" class="form-control" placeholder="e.g. Instagram Reels, Meme Marketing, Campus Outreach, WhatsApp Groups" value="Instagram Reels, Meme Marketing, Campus Outreach">
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <span class="badge bg-secondary p-2 cursor-pointer" onclick="appendInterest('Instagram Reels')">+ Instagram Reels</span>
+              <span class="badge bg-secondary p-2 cursor-pointer" onclick="appendInterest('Meme Marketing')">+ Meme Marketing</span>
+              <span class="badge bg-secondary p-2 cursor-pointer" onclick="appendInterest('WhatsApp Groups')">+ WhatsApp Groups</span>
+              <span class="badge bg-secondary p-2 cursor-pointer" onclick="appendInterest('Campus Outreach')">+ Campus Outreach</span>
+              <span class="badge bg-secondary p-2 cursor-pointer" onclick="appendInterest('Video Editing')">+ Video Editing</span>
+              <span class="badge bg-secondary p-2 cursor-pointer" onclick="appendInterest('College Fests')">+ College Fests</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-3 mt-3 fs-6">
+          <i class="fas fa-check-circle me-2"></i> Register Account
+        </button>
+      </form>
+
+      <div class="text-center mt-4">
+        <span class="text-secondary small">Already have an account?</span>
+        <a href="{{ url_for('login_view') }}" class="fw-bold ms-1 text-cyan">Sign In</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function selectRegRole(role) {
+  document.getElementById('regRoleInput').value = role;
+  const ownerTab = document.getElementById('regTabOwner');
+  const empTab = document.getElementById('regTabEmployee');
+  const ownerSec = document.getElementById('ownerFieldsSection');
+  const empSec = document.getElementById('employeeFieldsSection');
+
+  if (role === 'owner') {
+    ownerTab.style.background = 'var(--primary-blue)';
+    ownerTab.style.color = '#fff';
+    empTab.style.background = 'transparent';
+    empTab.style.color = 'var(--text-secondary)';
+    ownerSec.style.display = 'block';
+    empSec.style.display = 'none';
+  } else {
+    empTab.style.background = 'var(--primary-blue)';
+    empTab.style.color = '#fff';
+    ownerTab.style.background = 'transparent';
+    ownerTab.style.color = 'var(--text-secondary)';
+    ownerSec.style.display = 'none';
+    empSec.style.display = 'block';
+  }
+}
+
+function appendInterest(tag) {
+  const input = document.getElementById('employeeInterestsInput');
+  if (!input.value.includes(tag)) {
+    input.value = input.value ? input.value + ', ' + tag : tag;
+  }
+}
+</script>
+{% endblock %}

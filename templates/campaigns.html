@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block title %}Campaign Creator & Tracker — MarketMind AI{% endblock %}
+{% block header_title %}Multi-Channel Campaign Creator{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+  <!-- Campaign Creator Form -->
+  <div class="col-lg-5">
+    <div class="card h-100">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-plus-circle text-cyan"></i> Launch New Campaign</h3>
+      </div>
+      <div class="card-body">
+        <form id="campaignCreateForm">
+          <div class="form-group">
+            <label class="form-label">Campaign Name</label>
+            <input type="text" id="campTitle" class="form-control" placeholder="e.g. College Fest Sale" value="College Fest Sale" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Marketing Channel</label>
+            <select id="campChannel" class="form-control" required>
+              <option value="Instagram">📸 Instagram (Reels, Stories, Feed)</option>
+              <option value="WhatsApp">💬 WhatsApp (Status, Community Broadcast)</option>
+              <option value="YouTube">▶️ YouTube (Shorts & Creator Collabs)</option>
+              <option value="Google Ads">🔍 Google Ads (High-Intent Search)</option>
+              <option value="Email">✉️ Email (VIP Drops & Newsletters)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Target Demographic</label>
+            <input type="text" id="campTarget" class="form-control" placeholder="e.g. Students aged 18–24" value="Students aged 18–24" required>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6 form-group">
+              <label class="form-label">Budget (₹)</label>
+              <input type="number" id="campBudget" class="form-control" placeholder="10000" value="10000" required>
+            </div>
+            <div class="col-6 form-group">
+              <label class="form-label">Duration (Days)</label>
+              <input type="number" id="campDuration" class="form-control" placeholder="7" value="7" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-3 mt-2">
+            <i class="fas fa-rocket me-2"></i> Launch & Track Campaign
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campaign Channel Cards Overview -->
+  <div class="col-lg-7">
+    <div class="card h-100">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-chart-pie text-amber"></i> Supported Ad Platforms</h3>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          
+          <div class="col-md-6">
+            <div class="p-3 rounded" style="background: rgba(255, 0, 110, 0.08); border: 1px solid rgba(255, 0, 110, 0.25);">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fab fa-instagram fs-4 text-pink"></i>
+                <strong class="text-white">Instagram Reels & UGC</strong>
+              </div>
+              <p class="text-secondary small mb-0">High youth engagement. Viral visual showcase with influencer & student affiliate tags.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded" style="background: rgba(37, 211, 102, 0.08); border: 1px solid rgba(37, 211, 102, 0.25);">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fab fa-whatsapp fs-4 text-success"></i>
+                <strong class="text-white">WhatsApp Communities</strong>
+              </div>
+              <p class="text-secondary small mb-0">98% open rates! Direct college group broadcasts, flash discounts, and 1-click checkout.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded" style="background: rgba(255, 0, 0, 0.08); border: 1px solid rgba(255, 0, 0, 0.25);">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fab fa-youtube fs-4 text-danger"></i>
+                <strong class="text-white">YouTube Shorts</strong>
+              </div>
+              <p class="text-secondary small mb-0">High retention rate. Campus transformation videos and behind-the-scenes styling hauls.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 rounded" style="background: rgba(58, 134, 255, 0.08); border: 1px solid rgba(58, 134, 255, 0.25);">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fab fa-google fs-4 text-primary"></i>
+                <strong class="text-white">Google Ads</strong>
+              </div>
+              <p class="text-secondary small mb-0">Captures high purchase intent students searching for college fest apparel & discounts.</p>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="p-3 rounded" style="background: rgba(131, 56, 236, 0.08); border: 1px solid rgba(131, 56, 236, 0.25);">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fas fa-envelope-open-text fs-4 text-purple"></i>
+                <strong class="text-white">Direct Email & VIP Automations</strong>
+              </div>
+              <p class="text-secondary small mb-0">Automated welcome sequences, cart abandoners, and exclusive student fest passes.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Active Campaigns & Spending Dashboard -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><i class="fas fa-table-list text-cyan"></i> Campaign Spending & Status Dashboard</h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Campaign</th>
+            <th>Platform</th>
+            <th>Target Audience</th>
+            <th>Budget</th>
+            <th>Spend Progress</th>
+            <th>Duration</th>
+            <th>Performance</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for camp in campaigns %}
+          {% set pct = (camp.spent / camp.budget * 100)|round|int if camp.budget > 0 else 0 %}
+          <tr>
+            <td class="text-white fw-bold">{{ camp.title }}</td>
+            <td>
+              <span class="badge" style="background: rgba(58, 134, 255, 0.15); color: var(--primary-blue); border: 1px solid var(--border-color);">
+                {{ camp.channel }}
+              </span>
+            </td>
+            <td class="text-secondary">{{ camp.target_audience }}</td>
+            <td class="text-amber fw-bold">₹{{ "{:,.0f}".format(camp.budget) }}</td>
+            <td style="min-width: 140px;">
+              <div class="d-flex justify-content-between small text-secondary mb-1">
+                <span>₹{{ "{:,.0f}".format(camp.spent) }}</span>
+                <span>{{ pct }}%</span>
+              </div>
+              <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 4px;">
+                <div class="progress-bar" style="width: {{ pct }}%; background: var(--accent-cyan); border-radius: 4px;"></div>
+              </div>
+            </td>
+            <td>{{ camp.duration_days }} days</td>
+            <td class="small">
+              <span class="text-light d-block"><i class="fas fa-eye text-cyan me-1"></i>{{ "{:,}".format(camp.reach) }} Reach</span>
+              <span class="text-light d-block"><i class="fas fa-hand-pointer text-pink me-1"></i>{{ "{:,}".format(camp.clicks) }} Clicks</span>
+            </td>
+            <td><span class="status-pill active">{{ camp.status }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

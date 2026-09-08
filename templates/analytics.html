@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}Marketing Analytics — MarketMind AI{% endblock %}
+{% block header_title %}Deep Marketing Analytics & ROI{% endblock %}
+
+{% block content %}
+<!-- KPI Highlights Grid -->
+<div class="kpi-grid mb-4">
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-reach"><i class="fas fa-users"></i></div>
+    <div class="kpi-details">
+      <h4>👥 Total Reach</h4>
+      <div class="kpi-value">84,520</div>
+      <span class="kpi-badge positive">+14.2% MoM</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-clicks"><i class="fas fa-mouse-pointer"></i></div>
+    <div class="kpi-details">
+      <h4>👆 Total Clicks</h4>
+      <div class="kpi-value">9,240</div>
+      <span class="kpi-badge positive">10.9% CTR</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-engagement"><i class="fas fa-heart"></i></div>
+    <div class="kpi-details">
+      <h4>❤️ Engagement Rate</h4>
+      <div class="kpi-value">14.8%</div>
+      <span class="kpi-badge negative">-18% Drop</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-spent"><i class="fas fa-wallet"></i></div>
+    <div class="kpi-details">
+      <h4>💰 Ad Spend</h4>
+      <div class="kpi-value">₹32,500</div>
+      <span class="kpi-badge positive">Within Budget</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-sales"><i class="fas fa-chart-line"></i></div>
+    <div class="kpi-details">
+      <h4>📈 Conversion Rate</h4>
+      <div class="kpi-value">4.2%</div>
+      <span class="kpi-badge positive">+1.1%</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-sales"><i class="fas fa-shopping-bag"></i></div>
+    <div class="kpi-details">
+      <h4>🛒 Sales Generated</h4>
+      <div class="kpi-value">₹1,48,200</div>
+      <span class="kpi-badge positive">+28.4%</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-roi"><i class="fas fa-trophy"></i></div>
+    <div class="kpi-details">
+      <h4>ROI (Return On Ad Spend)</h4>
+      <div class="kpi-value">356%</div>
+      <span class="kpi-badge positive">4.56x ROAS</span>
+    </div>
+  </div>
+</div>
+
+<!-- Charts Row -->
+<div class="row g-4 mb-4">
+  <!-- Spend vs Sales -->
+  <div class="col-lg-8">
+    <div class="card h-100">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-chart-column text-cyan"></i> Money Spent vs Sales Generated (₹)</h3>
+        <span class="text-secondary small">Weekly Breakdown</span>
+      </div>
+      <div class="card-body" style="height: 320px; position: relative;">
+        <canvas id="spendVsSalesChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Channel Distribution Doughnut -->
+  <div class="col-lg-4">
+    <div class="card h-100">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-pie-chart text-pink"></i> Channel Traffic Split</h3>
+      </div>
+      <div class="card-body" style="height: 320px; position: relative;">
+        <canvas id="channelDistributionChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Detailed Channel Performance Table -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><i class="fas fa-table text-primary"></i> Multi-Channel ROI Comparison</h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Channel</th>
+            <th>Spend (₹)</th>
+            <th>Reach</th>
+            <th>Clicks</th>
+            <th>CTR</th>
+            <th>Orders</th>
+            <th>Revenue (₹)</th>
+            <th>ROAS (ROI)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-white fw-bold"><i class="fab fa-instagram text-pink me-2"></i>Instagram Ads & Reels</td>
+            <td class="text-amber">₹13,500</td>
+            <td>42,600</td>
+            <td>4,810</td>
+            <td>11.3%</td>
+            <td>210</td>
+            <td class="text-emerald fw-bold">₹64,200</td>
+            <td><span class="badge bg-success">4.75x (375%)</span></td>
+          </tr>
+          <tr>
+            <td class="text-white fw-bold"><i class="fab fa-whatsapp text-success me-2"></i>WhatsApp Campus Broadcast</td>
+            <td class="text-amber">₹4,100</td>
+            <td>14,200</td>
+            <td>1,890</td>
+            <td>13.3%</td>
+            <td>98</td>
+            <td class="text-emerald fw-bold">₹31,400</td>
+            <td><span class="badge bg-success">7.65x (665%)</span></td>
+          </tr>
+          <tr>
+            <td class="text-white fw-bold"><i class="fab fa-youtube text-danger me-2"></i>YouTube Shorts Creator Collabs</td>
+            <td class="text-amber">₹8,000</td>
+            <td>21,400</td>
+            <td>1,420</td>
+            <td>6.6%</td>
+            <td>74</td>
+            <td class="text-emerald fw-bold">₹28,600</td>
+            <td><span class="badge bg-primary">3.57x (257%)</span></td>
+          </tr>
+          <tr>
+            <td class="text-white fw-bold"><i class="fab fa-google text-primary me-2"></i>Google Search Ads</td>
+            <td class="text-amber">₹6,900</td>
+            <td>6,320</td>
+            <td>1,120</td>
+            <td>17.7%</td>
+            <td>56</td>
+            <td class="text-emerald fw-bold">₹24,000</td>
+            <td><span class="badge bg-primary">3.47x (247%)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

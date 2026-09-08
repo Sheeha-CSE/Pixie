@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Content Studio — MarketMind AI{% endblock %}
+{% block header_title %}AI Marketing Content Studio{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  <!-- Content Form -->
+  <div class="col-lg-5">
+    <div class="card h-100">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-magic text-cyan"></i> Content Generator</h3>
+      </div>
+      <div class="card-body">
+        <form id="contentGenForm">
+          
+          <div class="form-group">
+            <label class="form-label">Select Content Type</label>
+            <select id="contentTypeSelect" class="form-control" required>
+              <option value="Instagram Caption">📸 Instagram Caption (Emojis & CTA)</option>
+              <option value="Ad Copy">🎯 High-Converting Ad Copy (Meta / Google)</option>
+              <option value="Email Subject Lines">✉️ Email Subject Lines (Open-Rate Booster)</option>
+              <option value="Product Description">👕 Product Description (Features & Benefits)</option>
+              <option value="Hashtags">#️⃣ Viral Hashtag Bundle</option>
+              <option value="Promotional Messages">💬 Promotional SMS / WhatsApp Broadcast</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Topic or Campaign Hook</label>
+            <input type="text" id="contentTopic" class="form-control" placeholder="e.g. College fest oversized streetwear collection drop" value="College fest oversized streetwear drop" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Brand Tone</label>
+            <select id="contentTone" class="form-control">
+              <option value="Energetic & Trendy">🔥 Energetic & Trendy (Youth/Gen-Z)</option>
+              <option value="Witty & Humorous">😂 Witty & Campus Humor</option>
+              <option value="Urgent & Limited-Time">⚡ Urgent & High-Scarcity (Flash Sale)</option>
+              <option value="Polished & Minimalist">✨ Polished & Clean Aesthetic</option>
+              <option value="Educational & Helpful">🎓 Educational & Friendly</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Key Features / Special Offer</label>
+            <textarea id="contentProduct" class="form-control" rows="3" placeholder="e.g. 240 GSM heavy cotton, code CAMPUSVIBE for 20% student off, free campus delivery">240 GSM heavy combed cotton, student 20% discount with code CAMPUSVIBE, free delivery to college hostel</textarea>
+          </div>
+
+          <button type="submit" id="btnGenContent" class="btn btn-primary w-100 py-3">
+            <i class="fas fa-sparkles me-2"></i> Generate AI Content
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Results Studio -->
+  <div class="col-lg-7">
+    <div id="contentResultBox" style="display: none;"></div>
+
+    <div id="contentDefaultState" class="card h-100 d-flex align-items-center justify-content-center text-center p-5">
+      <div class="kpi-icon-box mx-auto mb-3" style="width: 72px; height: 72px; font-size: 2.2rem; background: rgba(0, 245, 212, 0.15); color: var(--accent-cyan);">
+        <i class="fas fa-pen-nib"></i>
+      </div>
+      <h3 class="text-white mb-2">Ready to Craft High-Impact Copy</h3>
+      <p class="text-secondary mb-4" style="max-width: 440px;">
+        Select your content format on the left and click <strong>Generate AI Content</strong>. You'll get instant primary copy, multiple high-converting variations, hashtags, and expert tips!
+      </p>
+      <button type="button" class="btn btn-outline" onclick="document.getElementById('contentGenForm').dispatchEvent(new Event('submit'))">
+        <i class="fas fa-bolt me-1"></i> Generate Sample Instagram Caption
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %}

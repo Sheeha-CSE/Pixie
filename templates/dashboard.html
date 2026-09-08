@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block title %}Marketing Dashboard — MarketMind AI{% endblock %}
+{% block header_title %}Marketing Command Center{% endblock %}
+
+{% block content %}
+<!-- Innovative Part: AI Marketing Recommendation Engine Alert Banner -->
+<div class="ai-recommendation-box">
+  <div class="ai-rec-header">
+    <span class="ai-alert-tag">
+      <i class="fas fa-exclamation-triangle"></i> AI Growth Alert
+    </span>
+    <span class="badge bg-dark text-cyan px-3 py-1" style="border: 1px solid rgba(0, 245, 212, 0.4);">
+      <i class="fas fa-robot me-1"></i> Real-time Recommendation Engine
+    </span>
+  </div>
+  <div class="ai-rec-content">
+    <h3>📉 Your engagement dropped by 18% this month.</h3>
+    <div class="ai-rec-text">
+      <strong>AI recommends:</strong> "Post short-form vertical reels 3–4 times per week and target users aged 18–24 between 6 PM and 9 PM with trending student audio."
+    </div>
+    <div class="ai-rec-footer">
+      <span class="impact-badge">
+        <i class="fas fa-arrow-trend-up me-1"></i> Estimated Recovery: +24% social reach in 14 days
+      </span>
+      <div class="d-flex gap-2">
+        <a href="{{ url_for('content_generator_view') }}" class="btn btn-sm btn-cyan">
+          <i class="fas fa-video me-1"></i> Generate Reel Script
+        </a>
+        <button class="btn btn-sm btn-outline" onclick="window.pixieBot && window.pixieBot.openModal()">
+          <i class="fas fa-sparkles text-pink me-1"></i> Ask Pixie How
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7 Main KPI Metrics Grid -->
+<div class="kpi-grid">
+  <!-- Reach -->
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-reach">
+      <i class="fas fa-users"></i>
+    </div>
+    <div class="kpi-details">
+      <h4>👥 Total Reach</h4>
+      <div class="kpi-value">84,520</div>
+      <span class="kpi-badge positive"><i class="fas fa-arrow-up"></i> +14.2%</span>
+    </div>
+  </div>
+
+  <!-- Clicks -->
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-clicks">
+      <i class="fas fa-mouse-pointer"></i>
+    </div>
+    <div class="kpi-details">
+      <h4>👆 Clicks</h4>
+      <div class="kpi-value">9,240</div>
+      <span class="kpi-badge positive"><i class="fas fa-arrow-up"></i> +8.6%</span>
+    </div>
+  </div>
+
+  <!-- Engagement -->
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-engagement">
+      <i class="fas fa-heart"></i>
+    </div>
+    <div class="kpi-details">
+      <h4>❤️ Engagement</h4>
+      <div class="kpi-value">14.8%</div>
+      <span class="kpi-badge negative"><i class="fas fa-arrow-down"></i> -18% drop</span>
+    </div>
+  </div>
+
+  <!-- Money Spent -->
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-spent">
+      <i class="fas fa-wallet"></i>
+    </div>
+    <div class="kpi-details">
+      <h4>💰 Money Spent</h4>
+      <div class="kpi-value">₹32,500</div>
+      <span class="kpi-badge positive"><i class="fas fa-check"></i> On budget</span>
+    </div>
+  </div>
+
+  <!-- Conversion Rate -->
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-sales">
+      <i class="fas fa-chart-line"></i>
+    </div>
+    <div class="kpi-details">
+      <h4>📈 Conversion Rate</h4>
+      <div class="kpi-value">4.2%</div>
+      <span class="kpi-badge positive"><i class="fas fa-arrow-up"></i> +1.1%</span>
+    </div>
+  </div>
+
+  <!-- Sales Generated -->
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-sales">
+      <i class="fas fa-shopping-cart"></i>
+    </div>
+    <div class="kpi-details">
+      <h4>🛒 Sales Generated</h4>
+      <div class="kpi-value">₹1,48,200</div>
+      <span class="kpi-badge positive"><i class="fas fa-arrow-up"></i> +28.4%</span>
+    </div>
+  </div>
+
+  <!-- ROI -->
+  <div class="kpi-card">
+    <div class="kpi-icon-box kpi-roi">
+      <i class="fas fa-percentage"></i>
+    </div>
+    <div class="kpi-details">
+      <h4>ROI (Return)</h4>
+      <div class="kpi-value">356%</div>
+      <span class="kpi-badge positive"><i class="fas fa-fire"></i> 4.5x ROAS</span>
+    </div>
+  </div>
+</div>
+
+<!-- Performance Chart & Quick Actions Row -->
+<div class="row g-4 mb-4">
+  <div class="col-lg-8">
+    <div class="card h-100">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-chart-area text-primary"></i> Audience Reach & Click Velocity</h3>
+        <span class="text-secondary small">Last 7 Days</span>
+      </div>
+      <div class="card-body" style="height: 320px; position: relative;">
+        <canvas id="dashboardPerformanceChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card h-100">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-bolt text-amber"></i> Quick AI Actions</h3>
+      </div>
+      <div class="card-body d-flex flex-column gap-3">
+        <a href="{{ url_for('strategy_view') }}" class="p-3 rounded d-flex align-items-center gap-3" style="background: rgba(58, 134, 255, 0.1); border: 1px solid var(--border-color);">
+          <div class="kpi-icon-box" style="width:42px; height:42px; background:var(--primary-blue); color:#fff; font-size:1.1rem;">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div>
+            <div class="text-white fw-bold">New Marketing Strategy</div>
+            <div class="text-secondary small">Generate audience & budget breakdown</div>
+          </div>
+        </a>
+
+        <a href="{{ url_for('campaigns_view') }}" class="p-3 rounded d-flex align-items-center gap-3" style="background: rgba(0, 245, 212, 0.1); border: 1px solid var(--border-color);">
+          <div class="kpi-icon-box" style="width:42px; height:42px; background:var(--accent-cyan); color:#0b132b; font-size:1.1rem;">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <div>
+            <div class="text-white fw-bold">Create Multi-Channel Campaign</div>
+            <div class="text-secondary small">Instagram, WhatsApp, YouTube, Ads</div>
+          </div>
+        </a>
+
+        <a href="{{ url_for('content_generator_view') }}" class="p-3 rounded d-flex align-items-center gap-3" style="background: rgba(255, 0, 110, 0.1); border: 1px solid var(--border-color);">
+          <div class="kpi-icon-box" style="width:42px; height:42px; background:var(--accent-pink); color:#fff; font-size:1.1rem;">
+            <i class="fas fa-pen-nib"></i>
+          </div>
+          <div>
+            <div class="text-white fw-bold">AI Content Studio</div>
+            <div class="text-secondary small">Reel scripts, captions, emails & hashtags</div>
+          </div>
+        </a>
+
+        <div class="p-3 rounded d-flex align-items-center gap-3 cursor-pointer" onclick="window.pixieBot && window.pixieBot.openModal()" style="background: rgba(255, 71, 133, 0.15); border: 1px solid rgba(255, 71, 133, 0.3);">
+          <div class="kpi-icon-box" style="width:42px; height:42px; background:#ff4785; color:#fff; font-size:1.1rem;">
+            <i class="fas fa-sparkles"></i>
+          </div>
+          <div>
+            <div class="text-white fw-bold">Chat with Pixie ✨</div>
+            <div class="text-secondary small">Educational guidance & marketing companion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Active Campaigns Table -->
+<div class="card mb-4">
+  <div class="card-header">
+    <h3 class="card-title"><i class="fas fa-list-check text-cyan"></i> Active Marketing Campaigns</h3>
+    <a href="{{ url_for('campaigns_view') }}" class="btn btn-sm btn-outline">View All & Create</a>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Campaign Name</th>
+            <th>Channel</th>
+            <th>Target Audience</th>
+            <th>Budget (₹)</th>
+            <th>Spent (₹)</th>
+            <th>Duration</th>
+            <th>Reach</th>
+            <th>Clicks</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for camp in campaigns %}
+          <tr>
+            <td class="text-white fw-bold">{{ camp.title }}</td>
+            <td>
+              <span class="badge" style="background: rgba(58, 134, 255, 0.15); color: var(--primary-blue); border: 1px solid var(--border-color);">
+                <i class="fab fa-{{ 'instagram' if camp.channel == 'Instagram' else ('whatsapp' if camp.channel == 'WhatsApp' else ('youtube' if camp.channel == 'YouTube' else 'google')) }} me-1"></i>
+                {{ camp.channel }}
+              </span>
+            </td>
+            <td class="text-secondary">{{ camp.target_audience }}</td>
+            <td class="text-amber fw-bold">₹{{ "{:,.0f}".format(camp.budget) }}</td>
+            <td class="text-light">₹{{ "{:,.0f}".format(camp.spent) }}</td>
+            <td>{{ camp.duration_days }} days</td>
+            <td class="text-white">{{ "{:,}".format(camp.reach) }}</td>
+            <td class="text-cyan">{{ "{:,}".format(camp.clicks) }}</td>
+            <td><span class="status-pill active">{{ camp.status }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

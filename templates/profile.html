@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Business Profile — MarketMind AI{% endblock %}
+{% block header_title %}Business Profile & Contact Settings{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <div class="card p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom" style="border-color: var(--border-color) !important;">
+        <div>
+          <h2 class="text-white"><i class="fas fa-building text-cyan me-2"></i>Business Identity</h2>
+          <p class="text-secondary small">Your profile details feed into our AI strategy and employee matchmaking engines.</p>
+        </div>
+        <span class="badge bg-primary px-3 py-2">Profile Active</span>
+      </div>
+
+      <form action="{{ url_for('profile_view') }}" method="POST">
+        
+        <h4 class="text-cyan mb-3 small text-uppercase"><i class="fas fa-info-circle me-1"></i> Core Business Parameters</h4>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6 form-group">
+            <label class="form-label">Business Name</label>
+            <input type="text" name="business_name" class="form-control" value="{{ profile.business_name if profile else 'Aura Trends Fashion Co.' }}" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="form-label">Industry</label>
+            <input type="text" name="industry" class="form-control" value="{{ profile.industry if profile else 'Youth Apparel & College Streetwear' }}" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="form-label">Location / Target Hub</label>
+            <input type="text" name="location" class="form-control" value="{{ profile.location if profile else 'Bangalore & New Delhi, India' }}" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="form-label">Monthly Marketing Budget (₹)</label>
+            <input type="number" name="budget" class="form-control" value="{{ profile.budget|int if profile else 80000 }}" required>
+          </div>
+          <div class="col-12 form-group">
+            <label class="form-label">Target Audience Description</label>
+            <input type="text" name="target_audience" class="form-control" value="{{ profile.target_audience if profile else 'College students aged 18–24, youth creators, college fest attendees' }}" required>
+          </div>
+          <div class="col-12 form-group">
+            <label class="form-label">Products / Services Offered</label>
+            <textarea name="products_services" class="form-control" rows="3" required>{{ profile.products_services if profile else 'Oversized Graphic Tees, French Terry Hoodies, Campus Bags, Cargo Pants, Sticker Packs' }}</textarea>
+          </div>
+        </div>
+
+        <h4 class="text-amber mb-3 small text-uppercase"><i class="fas fa-id-card me-1"></i> Business Person Contact Information (Visible to Employees)</h4>
+        <div class="row g-3 mb-4 p-3 rounded" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);">
+          <div class="col-md-4 form-group mb-0">
+            <label class="form-label">Contact Phone</label>
+            <input type="text" name="contact_phone" class="form-control" value="{{ profile.contact_phone if profile else '+91 98765 43210' }}" required>
+          </div>
+          <div class="col-md-4 form-group mb-0">
+            <label class="form-label">Official Email</label>
+            <input type="email" name="contact_email" class="form-control" value="{{ profile.contact_email if profile else 'founder@auratrends.com' }}" required>
+          </div>
+          <div class="col-md-4 form-group mb-0">
+            <label class="form-label">WhatsApp Contact Number</label>
+            <input type="text" name="contact_whatsapp" class="form-control" value="{{ profile.contact_whatsapp if profile else '+91 98765 43210' }}" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary py-3 px-4 fs-6">
+          <i class="fas fa-save me-2"></i> Save Profile Settings
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

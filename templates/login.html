@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign In — MarketMind AI{% endblock %}
+{% block header_title %}Sign In to MarketMind{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+  <div class="col-lg-5 col-md-8">
+    <div class="card p-4" style="border: 1px solid var(--border-color); box-shadow: var(--shadow-elevated);">
+      
+      <div class="text-center mb-4">
+        <div class="brand-icon mx-auto mb-3" style="width: 56px; height: 56px; font-size: 1.8rem;">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h2 class="text-white">Welcome Back</h2>
+        <p class="text-secondary small">Access your AI Marketing Headquarters</p>
+      </div>
+
+      <!-- Role Selection Pill Tabs -->
+      <div class="d-flex p-1 mb-4 rounded-pill" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color);">
+        <button type="button" id="tabOwner" class="btn btn-sm flex-fill rounded-pill active" style="background: var(--primary-blue); color: #fff;" onclick="selectRoleTab('owner')">
+          <i class="fas fa-briefcase me-1"></i> Business Owner
+        </button>
+        <button type="button" id="tabEmployee" class="btn btn-sm flex-fill rounded-pill" style="background: transparent; color: var(--text-secondary);" onclick="selectRoleTab('employee')">
+          <i class="fas fa-user-graduate me-1"></i> Part-Time Employee
+        </button>
+      </div>
+
+      <form action="{{ url_for('login_view') }}" method="POST">
+        <input type="hidden" name="role" id="selectedRoleInput" value="owner">
+
+        <div class="form-group mb-3">
+          <label class="form-label">Email Address</label>
+          <div class="position-relative">
+            <input type="email" name="email" id="loginEmail" class="form-control" placeholder="name@company.com" required value="owner@marketmind.ai">
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" id="loginPassword" class="form-control" placeholder="••••••••" required value="owner123">
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-3 fs-6">
+          <i class="fas fa-sign-in-alt me-2"></i> Sign In to Dashboard
+        </button>
+      </form>
+
+      <!-- Quick Demo Access Bar -->
+      <div class="mt-4 pt-3 border-top" style="border-color: rgba(58, 134, 255, 0.15) !important;">
+        <span class="text-secondary small d-block text-center mb-2">⚡ 1-Click Instant Demo Access:</span>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-outline flex-fill py-2 small" onclick="fillDemoCredentials('owner@marketmind.ai', 'owner123', 'owner')">
+            <i class="fas fa-user-tie text-cyan me-1"></i> Demo Owner
+          </button>
+          <button type="button" class="btn btn-outline flex-fill py-2 small" onclick="fillDemoCredentials('alex@marketmind.ai', 'employee123', 'employee')">
+            <i class="fas fa-graduation-cap text-amber me-1"></i> Demo Employee
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <span class="text-secondary small">Don't have an account?</span>
+        <a href="{{ url_for('register_view') }}" class="fw-bold ms-1 text-cyan">Create Account</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function selectRoleTab(role) {
+  document.getElementById('selectedRoleInput').value = role;
+  const ownerTab = document.getElementById('tabOwner');
+  const empTab = document.getElementById('tabEmployee');
+
+  if (role === 'owner') {
+    ownerTab.style.background = 'var(--primary-blue)';
+    ownerTab.style.color = '#fff';
+    empTab.style.background = 'transparent';
+    empTab.style.color = 'var(--text-secondary)';
+    document.getElementById('loginEmail').value = 'owner@marketmind.ai';
+    document.getElementById('loginPassword').value = 'owner123';
+  } else {
+    empTab.style.background = 'var(--primary-blue)';
+    empTab.style.color = '#fff';
+    ownerTab.style.background = 'transparent';
+    ownerTab.style.color = 'var(--text-secondary)';
+    document.getElementById('loginEmail').value = 'alex@marketmind.ai';
+    document.getElementById('loginPassword').value = 'employee123';
+  }
+}
+
+function fillDemoCredentials(email, pw, role) {
+  selectRoleTab(role);
+  document.getElementById('loginEmail').value = email;
+  document.getElementById('loginPassword').value = pw;
+}
+</script>
+{% endblock %}

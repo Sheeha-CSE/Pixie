@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Background Scarf / Babushka Hood (Bright Pink Masha Style) -->
+  <path d="M50 8 C24 8 16 32 16 62 C16 78 28 92 50 92 C72 92 84 78 84 62 C84 32 76 8 50 8 Z" fill="#FF4785"/>
+  <path d="M50 8 C30 8 20 28 20 54 C24 48 35 42 50 42 C65 42 76 48 80 54 C80 28 70 8 50 8 Z" fill="#FF5C98" opacity="0.6"/>
+
+  <!-- Cute Hood Knot at Bottom -->
+  <polygon points="44,88 50,96 56,88" fill="#D91E5B"/>
+  <circle cx="50" cy="88" r="4.5" fill="#FF758F"/>
+
+  <!-- Hair Bangs Peeking from Scarf (Golden Blonde) -->
+  <path d="M28 44 C34 32 46 32 50 36 C54 32 66 32 72 44 C66 38 56 37 50 40 C44 37 34 38 28 44 Z" fill="#F4C430"/>
+  <path d="M42 37 C46 33 52 33 56 38 C52 36 46 36 42 37 Z" fill="#E5B020"/>
+
+  <!-- Face Skin (Soft Warm Peach) -->
+  <ellipse cx="50" cy="56" rx="26" ry="24" fill="#FFE0BD"/>
+
+  <!-- Rosy Blush Cheeks -->
+  <ellipse cx="33" cy="62" rx="5" ry="3.5" fill="#FF8FA3" opacity="0.65"/>
+  <ellipse cx="67" cy="62" rx="5" ry="3.5" fill="#FF8FA3" opacity="0.65"/>
+
+  <!-- Cute Nose -->
+  <ellipse cx="50" cy="59" rx="1.5" ry="1.2" fill="#E89880"/>
+
+  <!-- Sweet Happy Smile -->
+  <path d="M43 66 Q50 72 57 66" fill="none" stroke="#C4455A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M46 67 Q50 70 54 67" fill="#FF8FA3" opacity="0.7"/>
+
+  <!-- Eyebrows -->
+  <path d="M30 46 Q38 43 44 47" fill="none" stroke="#B87B1F" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M56 47 Q62 43 70 46" fill="none" stroke="#B87B1F" stroke-width="1.6" stroke-linecap="round"/>
+
+  <!-- Eyes Group -->
+  <!-- Left Eye -->
+  <g class="mascot-eye left-eye">
+    <!-- Sclera (White) -->
+    <ellipse cx="38" cy="53" rx="7" ry="8" fill="#FFFFFF"/>
+    <!-- Pupils & Iris Container (Animatable for curious looks) -->
+    <g class="mascot-pupils">
+      <!-- Big Expressive Emerald Green Iris -->
+      <circle cx="38" cy="53" r="5.2" fill="#2EC4B6"/>
+      <circle cx="38" cy="53" r="3.2" fill="#0E443F"/>
+      <!-- Sparkle Light Catch Highlights -->
+      <circle cx="36" cy="51" r="1.8" fill="#FFFFFF"/>
+      <circle cx="40" cy="55" r="0.9" fill="#FFFFFF"/>
+    </g>
+    <!-- Eyelash / Eyelid Outline -->
+    <path d="M31 52 Q38 46 45 52" fill="none" stroke="#4A2511" stroke-width="2" stroke-linecap="round"/>
+    <!-- Blinking Eyelid Group -->
+    <ellipse cx="38" cy="53" rx="7.2" ry="8.2" fill="#FFE0BD" class="mascot-eyelid" style="transform-origin: 38px 53px;"/>
+  </g>
+
+  <!-- Right Eye -->
+  <g class="mascot-eye right-eye">
+    <!-- Sclera (White) -->
+    <ellipse cx="62" cy="53" rx="7" ry="8" fill="#FFFFFF"/>
+    <!-- Pupils & Iris Container -->
+    <g class="mascot-pupils">
+      <!-- Big Expressive Emerald Green Iris -->
+      <circle cx="62" cy="53" r="5.2" fill="#2EC4B6"/>
+      <circle cx="62" cy="53" r="3.2" fill="#0E443F"/>
+      <!-- Sparkle Light Catch Highlights -->
+      <circle cx="60" cy="51" r="1.8" fill="#FFFFFF"/>
+      <circle cx="64" cy="55" r="0.9" fill="#FFFFFF"/>
+    </g>
+    <!-- Eyelash / Eyelid Outline -->
+    <path d="M55 52 Q62 46 69 52" fill="none" stroke="#4A2511" stroke-width="2" stroke-linecap="round"/>
+    <!-- Blinking Eyelid Group -->
+    <ellipse cx="62" cy="53" rx="7.2" ry="8.2" fill="#FFE0BD" class="mascot-eyelid" style="transform-origin: 62px 53px;"/>
+  </g>
+
+  <!-- Cute Forehead Sparkle Star -->
+  <polygon points="50,18 51.5,23 56,24.5 51.5,26 50,31 48.5,26 44,24.5 48.5,23" fill="#FFF275" opacity="0.9"/>
+</svg>

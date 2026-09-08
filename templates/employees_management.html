@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Employee Marketers — MarketMind AI{% endblock %}
+{% block header_title %}Part-Time Employee Marketers Hub{% endblock %}
+
+{% block content %}
+<div class="card mb-4" style="background: linear-gradient(135deg, rgba(58, 134, 255, 0.12), rgba(0, 245, 212, 0.08)); border-left: 4px solid var(--accent-cyan);">
+  <div class="card-body p-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <h3 class="text-white mb-1"><i class="fas fa-users-gear text-cyan me-2"></i>Campus Marketer Workforce</h3>
+        <p class="text-secondary mb-0">Track registered student marketing affiliates, review submitted promotional proofs, and assign viral campaigns.</p>
+      </div>
+      <a href="{{ url_for('campaigns_view') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i> Create Campaign For Affiliates
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Employees Roster -->
+<div class="card mb-4">
+  <div class="card-header">
+    <h3 class="card-title"><i class="fas fa-address-book text-amber"></i> Registered Part-Time Employees</h3>
+    <span class="badge bg-secondary px-3 py-1">{{ employees|length }} Active Promoters</span>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Promoter</th>
+            <th>Contact Phone</th>
+            <th>Marketing Interests & Patterns</th>
+            <th>Tasks Completed</th>
+            <th>Total Paid</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for emp in employees %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="user-avatar-circle" style="width: 36px; height: 36px; font-size: 1rem;">
+                  {{ emp.avatar or '🎓' }}
+                </div>
+                <div>
+                  <strong class="text-white d-block">{{ emp.name }}</strong>
+                  <span class="text-secondary small">{{ emp.email }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="text-light">
+              <a href="tel:{{ emp.phone }}" class="text-cyan"><i class="fas fa-phone me-1"></i>{{ emp.phone }}</a>
+            </td>
+            <td>
+              <div class="d-flex flex-wrap gap-1">
+                {% for tag in (emp.interests or '').split(',') %}
+                  {% if tag.strip() %}
+                    <span class="badge bg-secondary text-white small" style="font-size: 0.72rem;">{{ tag.strip() }}</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </td>
+            <td class="text-white fw-bold">3 Tasks</td>
+            <td class="text-amber fw-bold">₹3,500</td>
+            <td>
+              <a href="https://wa.me/{{ (emp.phone or '')|replace('+', '')|replace(' ', '') }}" target="_blank" class="btn btn-sm btn-cyan">
+                <i class="fab fa-whatsapp me-1"></i> Message
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Submitted Task Proofs for Approval -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><i class="fas fa-stamp text-cyan"></i> Proof of Work Submissions</h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Promoter</th>
+            <th>Channel</th>
+            <th>Stipend</th>
+            <th>Submitted Proof Link & Notes</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in tasks %}
+          <tr>
+            <td class="text-white fw-bold">{{ t.title }}</td>
+            <td class="text-light">{{ t.employee_name or 'Alex Rivera' }}</td>
+            <td>{{ t.channel }}</td>
+            <td class="text-amber fw-bold">₹{{ t.reward_inr }}</td>
+            <td style="max-width: 300px;">
+              {% if t.proof_url %}
+                <a href="{{ t.proof_url }}" target="_blank" class="text-cyan fw-bold d-block"><i class="fas fa-external-link-alt me-1"></i> Proof URL</a>
+              {% endif %}
+              <span class="text-secondary small">{{ t.proof_text or 'Broadcasted to 8 campus clubs' }}</span>
+            </td>
+            <td>
+              <span class="status-pill {{ 'approved' if t.status == 'Approved' else 'submitted' }}">{{ t.status }}</span>
+            </td>
+            <td>
+              {% if t.status != 'Approved' %}
+                <form action="{{ url_for('approve_task_action', task_id=t.id) }}" method="POST" style="display:inline;">
+                  <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="fas fa-check me-1"></i> Approve & Reward
+                  </button>
+                </form>
+              {% else %}
+                <span class="badge bg-success"><i class="fas fa-check-double"></i> Paid</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

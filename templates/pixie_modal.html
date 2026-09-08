@@ -1,0 +1,134 @@
+<!-- Pixie AI Mascot & Modal Component -->
+<div class="pixie-modal-backdrop" id="pixieModal">
+  <div class="pixie-window">
+    
+    <!-- Dynamic Animated Context Background Layer -->
+    <div class="pixie-bg-layer" id="pixieBgLayer"></div>
+
+    <!-- Realistic Sparkle & Glitter Falling Canvas -->
+    <canvas id="pixieSparkleCanvas"></canvas>
+
+    <!-- Pixie Header -->
+    <div class="pixie-header">
+      <div class="pixie-mascot-badge">
+        <div class="mascot-avatar-frame">
+          <div class="mascot-svg-wrap">
+            <img src="/static/assets/mascot.svg" alt="Pixie Mascot" style="width: 100%; height: 100%;">
+          </div>
+          <span class="pixie-status-indicator"></span>
+        </div>
+        <div class="pixie-title-area">
+          <h3>Pixie ✨ <span class="badge bg-pink text-white" style="font-size: 0.65rem; background:#ff4785; padding: 2px 8px; border-radius: 12px;">AI ASSISTANT</span></h3>
+          <span class="pixie-tagline">Your Marketing & Campus Companion</span>
+        </div>
+      </div>
+
+      <div class="pixie-header-controls">
+        <!-- Language Selector -->
+        <select class="lang-select" id="pixieLanguage" title="Change Language">
+          <option value="English">🌐 English</option>
+          <option value="Hindi">🇮🇳 हिन्दी (Hindi)</option>
+          <option value="Telugu">🇮🇳 తెలుగు (Telugu)</option>
+          <option value="Tamil">🇮🇳 தமிழ் (Tamil)</option>
+          <option value="Spanish">🇪🇸 Español</option>
+          <option value="French">🇫🇷 Français</option>
+          <option value="German">🇩🇪 Deutsch</option>
+        </select>
+
+        <!-- Voice Output Toggle -->
+        <button class="btn-pixie-tool active" id="btnPixieTTS" title="Toggle Voice Output">
+          <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Close Modal -->
+        <button class="btn-pixie-tool" id="closePixieModal" title="Close Pixie">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Welcome Slideshow Layer (Think, Learn, Grow) -->
+    <div class="pixie-slideshow-overlay" id="pixieSlideshow">
+      <div class="slideshow-card">
+        <span class="slide-badge" id="slideBadge">✨ Welcome to Pixie</span>
+        <h2 class="slideshow-title" id="slideTitle">Your Creative AI <span>Companion</span></h2>
+        <p class="slideshow-desc" id="slideDesc">
+          I'm Pixie! Inspired by joyful curiosity and built with advanced AI to supercharge your business growth and college life.
+        </p>
+
+        <div class="slideshow-features" id="slideFeatures">
+          <div class="feature-pill">
+            <i class="fas fa-lightbulb"></i>
+            <span>Think Deeply</span>
+          </div>
+          <div class="feature-pill">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Learn Daily</span>
+          </div>
+          <div class="feature-pill">
+            <i class="fas fa-chart-line"></i>
+            <span>Grow Fast</span>
+          </div>
+        </div>
+
+        <div class="slide-dots">
+          <span class="slide-dot active"></span>
+          <span class="slide-dot"></span>
+          <span class="slide-dot"></span>
+          <span class="slide-dot"></span>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3">
+          <button class="btn btn-outline" id="btnStartChat" style="border-radius: 20px; padding: 8px 20px; color: #ff4785; border-color: #ff4785;">
+            Skip Intro
+          </button>
+          <button class="btn btn-primary" id="btnNextSlide" style="background: linear-gradient(135deg, #ff4785, #ff758f); border-radius: 20px; padding: 8px 24px;">
+            Next →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Messages Body -->
+    <div class="pixie-chat-body" id="pixieChatBody">
+      <!-- Mascot Curious Waiting Indicator -->
+      <div class="mascot-waiting-indicator" id="mascotWaiting">
+        <i class="fas fa-sparkles text-pink"></i> Pixie is thinking & looking curious...
+      </div>
+    </div>
+
+    <!-- Input Footer Bar -->
+    <div class="pixie-footer">
+      <!-- Upload preview tray -->
+      <div class="upload-preview-tray" id="uploadPreviewTray">
+        <img src="" id="previewImg" class="upload-thumb" alt="Preview"/>
+        <span id="previewFileName" class="small text-muted flex-grow-1"></span>
+        <button class="btn btn-sm text-danger" onclick="window.pixieBot.clearFileUpload()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Hidden file input for images & videos -->
+      <input type="file" id="pixieMediaUpload" accept="image/*,video/*" style="display: none;">
+
+      <div class="pixie-input-wrapper">
+        <!-- Media Upload Button -->
+        <button class="btn-pixie-action" id="btnPixieUpload" title="Upload Picture or Video">
+          <i class="fas fa-paperclip"></i>
+        </button>
+
+        <!-- Mic (Speech-to-Text) Button -->
+        <button class="btn-pixie-action" id="btnPixieMic" title="Click to speak (Voice Mic)">
+          <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Search / Chat Input Field -->
+        <input type="text" class="pixie-input" id="pixieInput" placeholder="Ask Pixie anything about marketing, college, or study tips..." autocomplete="off">
+
+        <!-- Send Button -->
+        <button class="btn-pixie-action btn-pixie-send" id="btnPixieSend" title="Send Message">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
